@@ -2,7 +2,7 @@
   <div id="app">
     <div class="container">
       <div class="row">
-        <div class="col-9">
+        <div class="col-lg-9 col-sm-12">
           <div class="card bg-dark text-white">
             <div class="card-body">
               <h4 class="card-title">{{ title }}</h4>
@@ -10,7 +10,7 @@
                 <div class="form-group">
                   <div class="container">
                     <div class="row">
-                      <div class="col-7">
+                      <div class="col-lg-7 col-sm-12">
                         <input
                           type="text"
                           @keyup="validateURL"
@@ -19,7 +19,7 @@
                           placeholder="Enter URL"
                         />
                       </div>
-                      <div class="col-5">
+                      <div class="col-lg-5 col-sm-12">
                         <input
                           type="submit"
                           :disabled="urlValidity != 'valid'"
@@ -33,7 +33,7 @@
                         <a v-if="created" v-bind:href="'https://' + URL">
                           <img
                             id="qrPreview"
-                            v-bind:src="'https://www.qrtag.net/api/qr_4.png?url=' + URL"
+                            v-bind:src="'https://www.qrtag.net/api/qr_4.png?url=http://' + URL"
                             class="form-control"
                             alt="qrtag"
                           />
@@ -46,10 +46,10 @@
             </div>
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-lg-3 col-sm-12">
           <div class="card bg-dark text-white">
             <div class="card-body">
-              <h4>Previous Lookups</h4>
+              <h4 class="card-title">History</h4>
               <div v-for="(item, index) in JSON.parse(previousURLs)" :key="index">
                 <a @click="setURL(item)" href="#">{{ item }}</a>
               </div>
@@ -115,8 +115,8 @@ export default {
       this.created = false;
     },
     setURL: function(url) {
+      this.urlValidity = "valid";
       this.URL = url;
-      this.validateURL();
       this.created = true;
     }
   },
@@ -136,9 +136,11 @@ export default {
   min-width: 300px;
 }
 
+.card{
+  margin-bottom:10px;
+}
+
 input {
-  padding: 10px;
-  width: 100%;
   font-size: 17px;
   font-family: arial;
   border: 1px solid #aaaaaa;
